@@ -14,7 +14,7 @@ Of course, learn about [Typst](https://typst.app/docs/), get started with the [T
 
 ## Example
 
-**[Example *typpo* document]()**.
+**[Example *typpo* document](https://github.com/isaiahespi/typpo/blob/main/template.pdf)**.
 
 ## Installing
 
