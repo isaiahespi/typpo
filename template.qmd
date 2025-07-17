@@ -236,7 +236,7 @@ Caption for the figure that spans the whole page.
 
 # Quarto, Typst, and bibliography processing
 
-By default, the template sets `citproc: true` in order to rely on Quarto processing of bibliography and references. Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst), but by default *typpo-article* turns it off by using `citeproc: true` to allow better bibliography customization and use of Quarto's [`#refs` div](https://quarto.org/docs/authoring/citations.html#bibliography-generation). In your document, include
+By default, the template sets `citproc: true` in order to rely on Quarto processing of bibliography and references. Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst), but by default *typpo* turns it off by using `citeproc: true` to allow better bibliography customization and use of Quarto's [`#refs` div](https://quarto.org/docs/authoring/citations.html#bibliography-generation). In your document, include
 
 ```md
 # References
