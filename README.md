@@ -12,10 +12,6 @@ Also check out these honorable mentions
 
 Of course, learn about [Typst](https://typst.app/docs/), get started with the [Typst Tutorial](https://typst.app/docs/tutorial/), and read up on how to [make a Typst template](https://typst.app/docs/tutorial/making-a-template/).
 
-## Example
-
-**[Example *typpo* document](https://github.com/isaiahespi/typpo/blob/main/template.pdf)**.
-
 ## Installing
 
 Anyway, install this Quarto extension in two ways. First option: add it to an existing project by running the following in the terminal or command line
