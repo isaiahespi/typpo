@@ -252,7 +252,7 @@
               \ #emph(author.affiliation)
             ]
             if "email" in author [
-              \ #link("mailto:" + "author.email")
+              \ #link("mailto:" + to-string(author.email))
             ]
             }))
           )
