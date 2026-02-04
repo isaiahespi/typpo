@@ -39,9 +39,6 @@ $endif$
 $if(abstract)$
   abstract: [$abstract$],
 $endif$
-$if(papersize)$
-  paper: "$papersize$",
-$endif$
 $if(mainfont)$
   font: ("$mainfont$",),
 $elseif(brand.typography.base.family)$
@@ -50,8 +47,8 @@ $endif$
 $if(mathfont)$
   mathfont: ($for(mathfont)$"$mathfont$",$endfor$),
 $endif$
-$if(monofont)$
-  monofont: ($for(monofont)$"$monofont$",$endfor$),
+$if(codefont)$
+  codefont: ($for(codefont)$"$codefont$",$endfor$),
 $endif$
 $if(fontsize)$
   fontsize: $fontsize$,
@@ -116,6 +113,9 @@ $endif$
 $if(linkcolor)$
   linkcolor: $linkcolor$,
 $endif$
+$if(monobackgroundcolor)$
+  monobackgroundcolor: $monobackgroundcolor$,
+$endif$
 $if(col-gutter)$
   col-gutter: $col-gutter$,
 $endif$
@@ -127,7 +127,6 @@ $if(bibliography-title)$
 $endif$
 
 // Conditional logic for two column layout
-
 $if(two-column)$
   // default 2-column layout
   margin: $if(margin)$($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$)$else$(x: 2.2cm, y: 2.6cm)$endif$,
@@ -139,5 +138,6 @@ $else$
   $if(fontsize)$fontsize: $fontsize$,$elseif(brand.typography.base.size)$fontsize: $brand.typography.base.size$,$endif$
   cols: $if(columns)$$columns$$else$1$endif$,
 $endif$
+
   doc,
 )

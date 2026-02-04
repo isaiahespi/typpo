@@ -45,14 +45,15 @@
   
   // layout settings
   margin: (x: 2.2cm, y: 2.6cm),
-  paper: "us-letter",
+  paper: "a4",
   lang: "en",
   region: "US",
-  font: ("STIX Two Text", "Spectral", "Crimson Text", "Garamond", "Palatino Linotype", "Wittgenstein", "Libertinus Serif"),
-  mathfont: ("New Computer Modern Math"),
-  monofont: ("Fira Code", "DejaVu Sans Mono"),
+  font: none,
+  mathfont: none,
+  codefont: none,
   fontsize: 11pt,
-  linkcolor: "#800000",
+  linkcolor: maroon,
+  monobackgroundcolor: none,
   title-size: 1.5em,
   subtitle-size: 1.25em,
   
@@ -66,9 +67,9 @@
   toc_indent: 1.5em,
   
   leading: 0.65em,
-  spacing: 1em,
+  spacing: 1.2em,
   first-line-indent: 1.8em,
-  all: true,
+  all: false,
   // Bibliography settings (no effect if citeproc used)
   bibliography-title: "References",
   bibliographystyle: "chicago-author-date",
@@ -162,25 +163,49 @@
     size: fontsize
   )
   
+   // Define space around block quotes
+  show quote.where(block: true): set block(spacing: spacing * 1.8)
+  // Don't indent anything in block quotes
+  show quote.where(block: true): set par(first-line-indent: 0em)
   
   // math font and code font
-  show math.equation: set text(font: mathfont)
-  show raw: set text(font: monofont, weight: "medium")
+  show math.equation: set text(font: mathfont) if mathfont != none
   
-  // link and cite colors
-  show link: this => {
-    if type(this.dest) != label {
-      text(this, fill: rgb(linkcolor.replace("\\#", "#")))
+  show raw: set text(font: codefont) if codefont != none
+  // Display inline code in a small box
+  // that retains the correct baseline.
+  show raw.where(block: false): box.with(
+    fill: luma(240),
+    inset: (x: 3pt, y: 0pt),
+    outset: (y: 3pt),
+    radius: 2pt
+  )
+  show raw.where(block: true): it =>{
+    if monobackgroundcolor != none {
+      block(fill: monobackgroundcolor, width: 100%, inset: 8pt, radius: 2pt, it)
     } else {
-      text(this, fill: rgb("#0000CC"))
+      block(fill: luma(230), width: 100%, inset: 8pt, radius: 2pt, it)
     }
   }
   
-  show cite.where(form: "prose"): this => {
-    text(this, fill: rgb("#800000"))
+  
+  // link and cite colors
+  show link: this => {
+    if type(this.dest) == label {
+      text(this, fill: rgb("#0074d9"))
+    } else {
+      text(this, fill: linkcolor)
+    }
   }
+  
+  // No effect when `citeproc: true`
+  show cite.where(form: "prose"): this => {
+    text(this, fill: linkcolor)
+  }
+  
+  
   show ref: this => {
-    text(this, fill: rgb("#800000"))
+    text(this, fill: linkcolor)
   }
 
   // Lists
@@ -193,10 +218,7 @@
   // Footnotes  
   set footnote.entry(indent: 0.7em, gap: 0.75em)
   
-  // Customize Typst bibliography (no effect if `citeproc: true`)
-  set bibliography(title: bibliography-title, style: bibliographystyle)
-  show bibliography: set par(spacing: spacing, leading: leading)
-  
+  // Customize figure display
   // Customize figure display
   show figure: f => { [#v(leading) #f #v(leading) ] }
   show figure.where(kind: "quarto-float-fig"): set block(width: 100%)
@@ -217,7 +239,9 @@
   // metadata
   set document(
     title: if title != none { title } else { none },
-    author: if authors != none { authors.map(a => str(a.name.text)) } else { () },
+    author: if authors != none { 
+      content-to-string(runningauth)
+      } else { () },
     description: abstract,
     date: auto
   )
@@ -252,7 +276,7 @@
               \ #emph(author.affiliation)
             ]
             if "email" in author [
-              \ #link("mailto:" + to-string(author.email))
+              \ #link("mailto:" + content-to-string(author.email))
             ]
             }))
           )

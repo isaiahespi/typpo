@@ -14,6 +14,10 @@ $if(bibliography)$
   leading: 0.65em
 )
 
+$if(suppress-bibliography)$
+#show bibliography: none
+$endif$
+
 #bibliography($for(bibliography)$"$bibliography$"$sep$,$endfor$, title: "$biblio-title$")
 $endif$
 $endif$

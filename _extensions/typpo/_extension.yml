@@ -1,23 +1,39 @@
 title: Typpo
 author: isaiahespi
-version: 1.0.0
+version: 1.2.0
 quarto-required: ">=1.7.0"
 contributes:
   formats:
     typst:
-      functions: [place, text, appendix]
+      functions: [place, text, appendix, ref]
       template-partials:
         - typst-template.typ
         - typst-show.typ
         - biblio.typ
+        - definitions.typ
+        - notes.typ
+        - numbering.typ
+        - page.typ
       filters:
         - insert-show-appendix.lua
         - _extensions/christopherkenny/typst-function/typst-function.lua
-      monofont: "DejaVu Sans Mono"
+      mainfont: "STIX Two Text"
+      codefont: "Fira Code"
+      mathfont: "STIX Math"
       date-format: long
-      citeproc: true
+      paper: a4
       two-column: true
-      execute:
-        echo: false
-        warning: false
+      linkcolor: maroon
+      monobackgroundcolor: none
+      leading: 0.65em
+      spacing: 1.2em
+      first-line-indent: 1em
+      all: false
+      title-size: 1.5em
+      subtitle-size: 1.25em
+      sectionnumbering: "I.A.1"
+      pagenumbering: "1"
+      linenumbering: none
+      biblio-title: References
+      bibliographystyle: chicago-author-date
 

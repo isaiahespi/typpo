@@ -19,26 +19,27 @@ format:
     keep-typ: true
     # uncomment to adjust these options
     # two-column: true # default is `two-column: true` layout
-    # paper: "us-letter",    
+    # paper: "a4",
     # mainfont: "STIX Two Text"
-    # mathfont: "New Computer Modern Math"
+    # mathfont: "STIX Math"
     # monofont: "Fira Code"
     # fontsize: 11pt
     # leading: 0.65em # spacing between lines
     # spacing: 1.2em # spacing between paragaphs
     # first-line-indent: 1em
-    # all: true
-    # linkcolor: "#800000",
-    # title-size: 1.5em,
-    # subtitle-size: 1.25em,
-    # sectionnumbering: "I.A.1",
-    # pagenumbering: "1",
+    # all: false
+    # linkcolor: maroon
+    # monobackgroundcolor: none
+    # title-size: 1.5em
+    # subtitle-size: 1.25em
+    # sectionnumbering: "I.A.1"
+    # pagenumbering: "1"
     # linenumbering: none
-    # bibliography-titel: "Reference"
+    # bibliography-title: "Reference"
     # bibliographystyle: "chicago-author-date"
 ---
 
-# Introduction (First level heading) {#sec-intro}
+# Introduction {#sec-intro}
 
 This is an example of my custom Quarto Typst format I refer to as my `Typpo-article`. This format is strictly intended for PDF output, though I may later incorporate some other HTML output. This format should be able to accommodate all of the usual Quarto features already available to the default Typst format; the differences are mostly formatting and layout. For instance, two columns are default but this can be changed back to single column by changing the format option `two-column = false`. In Typst, the spacing between lines---i.e., 'leading'---is adjustable as is the spacing between paragraphs. Both of those options are available in this `typpo-article` format.  The title, author block, and abstract are always placed in a single column. 
 
@@ -96,7 +97,7 @@ Enumerated lists are the same, so no real difference from Quarto (or rather, Mar
 
 ### Third level heading
 
-This third level heading should be in-paragraph, semi-bold, and italic. In text citations should be in prose form so @fillmore-patrick2025 states that there's a problem with using logit as a measurement or something.
+This third level heading should be in-paragraph, semi-bold, and italic. In text citations should be in prose form so @fillmore-patrick2025 states that there's a problem with using logit as a measurement or something. Then I will include a citation at the end of this sentence [@hauser2018; @fillmore-patrick2025].
 
 # Maths {#sec-maths}
 
@@ -107,7 +108,15 @@ f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu
 $$ {#eq-1}
 
 
-Even better, you can use a Typst block to use the Typst syntax, allowing you to use both in one document:
+Even better, you can use a Typst block to use the Typst syntax, allowing you to use both in one document. Here's an example using a raw Typst block to type out some cool math equation:
+
+````
+```{=typst}
+$ A = pi r^2 $
+```
+
+````
+And here is what results:
 
 ```{=typst}
 $ A = pi r^2 $
@@ -124,30 +133,47 @@ The current font default is [STIX Two Text](https://fonts.google.com/specimen/ST
 
 
 -   [STIX Two Text*]{.text arguments='font:"STIX Two Text"'}
--   [Garamond]{.text arguments='font:"Garamond"'}
+-   [Wittgenstein*]{.text arguments='font:"Wittgenstein"'}
+-   [EB Garamond]{.text arguments='font:"EB Garamond"'}
 -   [Spectral]{.text arguments='font:"Spectral"'}
 -   [Crimson Text]{.text arguments='font:"Crimson Text"'}
--   [Palatino Linotype]{.text arguments='font:"Palatino Linotype"'}
--   [Wittgenstein*]{.text arguments='font:"Wittgenstein"'}
 -   [Libertinus Serif]{.text arguments='font:"Libertinus Serif"'}
+
+Also note that you can set `mathfont` and `codefont` (i.e., `monofont`) in the YAML options. This template sets by default **STIX Math** for `mathfont`, and **Fira Code** for the `codefont`. In the examples below, all the math output is in the default `mathfont` as is the `codefont`. So it's up to you to find whatever fonts match your chosen `mainfont` default. 
+
+:::{.callout-tip}
+To check what fonts are installed and available on your system, run the following command in the terminal:
+
+```bash
+quarto typst fonts
+```
+:::
+
 
 ## What font was used for this document
 
-This text of this paragraph is in the default font, which is either **STIX Two Text** or the font set in the YAML option `mainfont`. Here's some inline math ($y_i = \alpha + \beta x_i + \epsilon_i$). Here's some more with numbers ($\bar{x} = 0, sd = 1; p = 0.05, conf = [2.56, 7.56]$) {{< lipsum 1 >}}
-
-::: {.text arguments='font:"Palatino Linotype", size:11pt'}
-This text of this paragraph is in **Palatino Linotype**. Here's some inline math ($y_i = \alpha + \beta x_i + \epsilon_i$). Here's some more with numbers ($\bar{x} = 0, sd = 1; p = 0.05, conf = [2.56, 7.56]$) {{< lipsum 1 >}}
-:::
-
-
-::: {.text arguments='font:"Garamond", size:11pt'}
-This text of this paragraph is in **Garamond**. Here's some inline math ($y_i = \alpha + \beta x_i + \epsilon_i$). Here's some more with numbers ($\bar{x} = 0, sd = 1; p = 0.05, conf = [2.56, 7.56]$) {{< lipsum 1 >}}
-:::
+This text of this paragraph is in the default font, which is either **STIX Two Text** or the font set in the YAML option `mainfont`. Here's some inline math ($y_i = \alpha + \beta x_i + \epsilon_i$). Here's some more with numbers ($\bar{x} = 0, sd = 1; p = 0.05, conf = [2.56, 7.56]$). 
+{{< lipsum 1 >}}
 
 ::: {.text arguments='font:"Wittgenstein", size:11pt'}
-This text of this paragraph is in *Wittgenstein*. Here's some inline math ($y_i = \alpha + \beta x_i + \epsilon_i$). Here's some more with numbers ($\bar{x} = 0, sd = 1; p = 0.05, conf = [2.56, 7.56]$) {{< lipsum 1 >}}
+This text of this paragraph is in **Wittgenstein**. Here's some inline math ($y_i = \alpha + \beta x_i + \epsilon_i$). Here's some more with numbers ($\bar{x} = 0, sd = 1; p = 0.05, conf = [2.56, 7.56]$) {{< lipsum 1 >}}
 :::
 
+::: {.text arguments='font:"EB Garamond", size:11pt'}
+This text of this paragraph is in **EB Garamond**. Here's some inline math ($y_i = \alpha + \beta x_i + \epsilon_i$). Here's some more with numbers ($\bar{x} = 0, sd = 1; p = 0.05, conf = [2.56, 7.56]$) {{< lipsum 1 >}}
+:::
+
+::: {.text arguments='font:"Spectral", size:11pt'}
+This text of this paragraph is in **Spectral**. Here's some inline math ($y_i = \alpha + \beta x_i + \epsilon_i$). Here's some more with numbers ($\bar{x} = 0, sd = 1; p = 0.05, conf = [2.56, 7.56]$) {{< lipsum 1 >}}
+:::
+
+::: {.text arguments='font:"Crimson Text", size:11pt'}
+This text of this paragraph is in **Crimson Text**. Here's some inline math ($y_i = \alpha + \beta x_i + \epsilon_i$). Here's some more with numbers ($\bar{x} = 0, sd = 1; p = 0.05, conf = [2.56, 7.56]$) {{< lipsum 1 >}}
+:::
+
+::: {.text arguments='font:"Libertinus Serif", size:11pt'}
+This text of this paragraph is in **Libertinus Serif**. Here's some inline math ($y_i = \alpha + \beta x_i + \epsilon_i$). Here's some more with numbers ($\bar{x} = 0, sd = 1; p = 0.05, conf = [2.56, 7.56]$) {{< lipsum 1 >}}
+:::
 
 
 # Using `typst-function` extension
@@ -184,59 +210,79 @@ Alternatively, you can encase the text in square brackets `[]` and then call the
 
 ## Including code {#sec-code}
 
+Now here is some example code (R code) 
+
+
+```{r}
+#| label: matrix-algebra
+#| eval: false
+
+# create a 10 x 10 matrix (10 rows, 10 columns) of random values
+X <- matrix(rexp(100, rate = 0.1), nrow = 10, ncol = 10) |> round(3)
+
+```
+
+
 {{< lipsum 1 >}}
 
 ```{r}
 #| label: fig-sepal
-#| fig-cap: "According to ChatGPT, the Iris data set is a well-known dataset in the field of machine learning and statistics, often used for benchmarking algorithms. It consists of 150 observations of iris flowers from three species: Iris setosa, Iris versicolor, and Iris virginica. Each observation includes four features: sepal length, sepal width, petal length, and petal width, all measured in centimeters. This dataset is particularly useful for classification tasks as the species are distinct and easily separable based on the given measurements. In R, the dataset can be accessed using the datasets package with the command data(iris)."
+#| fig-cap: "This is a caption to the plot. This is what captions look like and where they are placed by default."
+
+
 plot(iris$Sepal.Length, iris$Sepal.Width)
 ```
 
-## Subfigures
-
-Figures can be placed using code, Typst blocks, or using [Quarto's figure syntax](https://quarto.org/docs/authoring/figures.html).
-To make a figure with subfigures, try:
-
-::: {#fig-subfig1 layout-ncol=2 cap-location=bottom}
-
-![fig a]({{< placeholder 100 100 format=svg >}}){#fig-sub1-a}
-
-![fig b]({{< placeholder 100 100 format=svg >}}){#fig-sub1-b}
-
-Caption for the subfigures 1.
-
-:::
 
 ## Full-width content
 
-You can also include page-wide figures (or any other content) in documents that have more than one column. See @fig-2 for an example. First, include
+You can also include page-wide figures (or any other content) in documents that have more than one column. First, include the following in the document's YAML:
 
 ```yaml
 functions: place
 ```
 
-in the document's YAML. Then, wrap your figure in a [Quarto div](https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) like this:
+Then, wrap your figure in a [Quarto div](https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) like this:
 
 ```
 ::: {.place arguments='top, scope: "parent", float: true'}
-Everything here will span the whole page.
+Everything here will span the whole page. Except this text.
 :::
 ```
 
-The above uses the Typst's [`place()` function](https://typst.app/docs/reference/layout/place/) through the [typst-function](https://github.com/christopherkenny/typst-function) Quarto extension to place the div's content in `"parent"` scope (the document page is the column's parent) and must specify that Typst should treat the content as a float. `auto` indicates where the figure should be on the page, and can be either `auto`, `bottom`, or `top`. (Note `auto` and `bottom` can make the figure appear below footnotes.)
+This works by use of Typst's [`place()` function](https://typst.app/docs/reference/layout/place/) through the [typst-function](https://github.com/christopherkenny/typst-function) Quarto extension to place the div's content in `"parent"` scope (the document page is the column's parent) and must specify that Typst should treat the content as a float. `auto` indicates where the figure should be on the page, and can be either `auto`, `bottom`, or `top`. (Note `auto` and `bottom` can make the figure appear below footnotes.)
 
-:::: {.place arguments='auto, scope: "parent", float: true'}
-::: {#fig-2}
-{{< placeholder 600 100 format=svg >}}
+### Subfigures
 
-Caption for the figure that spans the whole page.
+Figures can be placed using code, Typst blocks, or using [Quarto's figure syntax](https://quarto.org/docs/authoring/figures.html). Subfigures will look pretty bad in a two-column layout, so it is best to wrap the subfigures within the `::: {.place ...}` Div just mentioned. To produce a figure with subfigures, you can use an executable code block and wrap it in a Div in order to have both figures span the full width of the page:
+
+::: {.place arguments='auto, scope: "parent", float: true'}
+
+```{r}
+#| label: fig-subs
+#| eval: true
+#| echo: false
+#| layout-ncol: 2
+#| fig-cap-location: bottom
+#| fig-cap: "Two Subfigures"
+#| fig-subcap: 
+#|   - "Fig a"
+#|   - "Fig b"
+
+plot(cars)
+plot(pressure)
+
+```
+
 :::
-::::
-
 
 # Quarto, Typst, and bibliography processing
 
-By default, the template sets `citproc: true` in order to rely on Quarto processing of bibliography and references. Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst), but by default *typpo* turns it off by using `citeproc: true` to allow better bibliography customization and use of Quarto's [`#refs` div](https://quarto.org/docs/authoring/citations.html#bibliography-generation). In your document, include
+By default, the template does not rely on [Quarto (or rather, Pandoc)](https://quarto.org/docs/authoring/citations.html#sec-citations-style) for processing of bibliography and references.
+
+Typst has its [own built-in citation processing system](https://quarto.org/docs/authoring/citations.html#typst), which *typpo* utilizes by default. Fair warning: using Typst citation processing disallows the ability to place the bibliography anywhere within the document; the References section will always be placed at the end of the document (after any appendices). 
+
+If you prefer to utilize Quarto's citation processing system, set `citeproc: true` in YAML to allow bibliography customization and use of Quarto's [`#refs` div](https://quarto.org/docs/authoring/citations.html#bibliography-generation). Example:
 
 ```md
 # References
@@ -244,20 +290,29 @@ By default, the template sets `citproc: true` in order to rely on Quarto process
 ::: {#refs}
 :::
 ```
+Okay, to summarize, see note on the next page.
 
-to display the bibliography section anywhere in the document. Read more at Quarto's [citations documentation](https://quarto.org/docs/authoring/citations.html#typst).
+:::: {.place arguments='auto, scope: "parent", float: true'}
+:::{.callout-note title="Bibliography, References, Citations"}
 
-- When citeproc is off (`citeproc: false`)
+- When `citeproc` is off (`citeproc: false`)
+  - `bibliography: references.bib`
   - `bibliography-title` (string) - Bibliography section title
     - Example: `bibliography-title: "References"`
-  - `bibliographystyle` (string) - Citation style [[Quarto](https://quarto.org/docs/output-formats/typst.html#bibliography), [Typst](https://typst.app/docs/reference/model/bibliography/#styles)]
+  - `bibliographystyle` (string) - [Typst](https://typst.app/docs/reference/model/bibliography/#styles) built-in citation style
     - Example: `bibliographystyle: "chicago-author-date"`
+- When `citeproc` is on (`citeproc: true`)
+  - `bibliography: references.bib`
+  - `csl: "path/to/style.csl"`
 
-
-# References {.unnumbered}
-
-::: {#refs}
 :::
+::::
+
+## Conclusion
+
+That's all for now. Thanks. {{< lipsum 2 >}}
+
+
 
 
 # Appendix formatting {.appendix}
@@ -287,4 +342,7 @@ With a surprise sub-sub-section.
 |     5    |    dplyr |  1361177 |
 
 : Top R package downloads in June 2024 {#tbl-rpkgs}
+
+
+
 

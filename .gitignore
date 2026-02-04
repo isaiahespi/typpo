@@ -6,5 +6,7 @@
 .quarto
 
 template.pdf
-/template_files
+/*_files
 template.typ
+*.csl
+.directory
